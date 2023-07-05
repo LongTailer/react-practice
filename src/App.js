@@ -1,10 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import TodoList from './TodoList';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <h1>Todo List</h1>
+        <TodoList />  {/* TodoList.jsをコンポーネントとしてこの箇所で使用する。 */}
+        
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -18,6 +23,7 @@ function App() {
           Learn React
         </a>
       </header>
+      
     </div>
   );
 }
