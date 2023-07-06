@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './style.css';
 
 function TodoList() {
-    //配列の初期化
-    const[tasks,setTasks] = useState([]);
+    //ローカルストレージにタスクリストがある場合取得そうでなければ配列を空で初期化
+    const initialTasks = localStorage.getItem("tasks") ? JSON.parse(localStorage.getItem("tasks")) : [];
+    const[tasks,setTasks] = useState(initialTasks);
     const[inputValue,setInputValue] = useState('');
+    
+    //タスクリストが変化するたびにローカルストレージに保存する。
+    useEffect(() => {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    },[tasks]);
 
     //addボタン押下時処理
     const addTask = () => {
@@ -33,6 +39,8 @@ function TodoList() {
         newTasks.splice(index,1)
         setTasks(newTasks);
     }
+
+    
 
     return (
         <div className="container mx-auto mt-5 max-w-xl">
